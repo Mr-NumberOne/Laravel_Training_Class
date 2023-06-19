@@ -21,10 +21,10 @@
             <label for="image">image</label>
             <input type="file" accept="image/*" value="{{old('image')}}" name="image" class="form-control @error('image') is-invalid @enderror"
                   id="image">
-        </div>
         @error('image')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
         <a href="{{route('brands.index')}}" class="btn btn-danger">Cancel</a>

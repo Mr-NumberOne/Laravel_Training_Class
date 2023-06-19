@@ -44,6 +44,10 @@ Route::resource('brands',
     \App\Http\Controllers\BrandController::class);
 
 
+Route::resource('products',
+    \App\Http\Controllers\ProductController::class);
+
+
 
 
 
