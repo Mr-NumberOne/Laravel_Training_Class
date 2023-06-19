@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,15 @@ class CategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Category::class;
+    //! defining the model
     public function definition(): array
     {
         return [
-            //
+            'name'=>fake()->name(),
+            "description"=>fake()->address(),
+            "type"=>fake()->randomElement(['New', 'Old']),
+            "status"=>fake()->randomElement([0,1])
         ];
     }
 }
