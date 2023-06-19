@@ -19,7 +19,7 @@
         @enderror
         <div class="form-group">
             <label for="brand_id">Select Brand:</label>
-            <select class="form-control" id="brand_id" name="brand_id">
+            <select class="form-control select2 @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
                 <option value="">Select Brand</option>
                 @foreach($brands as $brand)
                     <option value="{{$brand->id}}"
@@ -28,18 +28,24 @@
                 @endforeach
 
             </select>
+            @error('brand_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for=" ">Select categories:</label>
-            <select class="form-control select2" id="brand_id" multiple name="categories[]">
+            <select class="form-control select2 @error('description') is-invalid @enderror"id="brand_id" multiple name="categories[]">
                 <option value="">Select Brand</option>
                 @foreach($categories as $category)
                     <option value="{{$category->id}}"
-
+                    @selected(is_array(old('categories'))
+                             && in_array($category->id, old('categories')))
                     >{{$category->name}}</option>
                 @endforeach
-
             </select>
+            @error('categories')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="price">Price</label>

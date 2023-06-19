@@ -70,7 +70,7 @@ class ProductController extends Controller
         $brands = Brand::all();
         return view('products.edit')
             ->with('categories',$categories)
-            ->with('products',$product)
+            ->with('product',$product)
             ->with('brands',$brands);
     }
 
