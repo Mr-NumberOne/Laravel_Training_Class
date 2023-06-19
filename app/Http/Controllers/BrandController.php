@@ -53,7 +53,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('brands.edit')->with('brand',$brand);
     }
 
     /**
