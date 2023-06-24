@@ -67,9 +67,9 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">access management:</h6>
-                    <a class="collapse-item" href="{{route('categories.index')}}">categories</a>
-                    <a class="collapse-item" href="{{route('brands.index')}}">Brands</a>
-                    <a class="collapse-item" href="{{route('products.index')}}">Products</a>
+                    <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
+                    <a class="collapse-item" href="{{route('brands.index')}}">Users</a>
+
                 </div>
             </div>
         </li>
