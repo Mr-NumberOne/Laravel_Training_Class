@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{__("code")}}">
 
 <head>
 
@@ -13,6 +13,9 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    @if(__('code')=='ar')
+        <link href="{{asset('admin/css/sb-admin-2-rtl.css')}}" rel="stylesheet">
+    @endif
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -25,7 +28,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" dir="{{__("dir")}}">
 
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -48,7 +51,7 @@
         <li class="nav-item active">
             <a class="nav-link" href="{{route('posts')}}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+                <span>{{__("Dashboard")}}</span></a>
         </li>
 
         <!-- Divider -->
@@ -61,15 +64,14 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-user-alt-slash"></i>
-                <span>Access</span>
+                <span>{{__("Access")}}</span>
             </a>
             <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">access management:</h6>
-                    <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
-                    <a class="collapse-item" href="{{route('brands.index')}}">Users</a>
-
+                    <h6 class="collapse-header">{{__("access management:")}}</h6>
+                    <a class="collapse-item" href="{{route('roles.index')}}">{{__("Roles")}}</a>
+                    <a class="collapse-item" href="{{route('brands.index')}}">{{__("Users")}}</a>
                 </div>
             </div>
         </li>
@@ -83,15 +85,15 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-store "></i>
-                <span>Store</span>
+                <span>{{__("Store")}}</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Store management:</h6>
-                    <a class="collapse-item" href="{{route('categories.index')}}">categories</a>
-                    <a class="collapse-item" href="{{route('brands.index')}}">Brands</a>
-                    <a class="collapse-item" href="{{route('products.index')}}">Products</a>
+                    <h6 class="collapse-header">{{__("Store management:")}}</h6>
+                    <a class="collapse-item" href="{{route('categories.index')}}">{{__("categories")}}</a>
+                    <a class="collapse-item" href="{{route('brands.index')}}">{{__("brands")}}</a>
+                    <a class="collapse-item" href="{{route('products.index')}}">{{__("products")}}</a>
                 </div>
             </div>
         </li>

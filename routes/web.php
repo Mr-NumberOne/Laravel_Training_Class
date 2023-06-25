@@ -38,6 +38,15 @@ Route::get('/dashboard', function () {
     return view('posts.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/changeLang/{lang}', function (string $locale) {
+    if (!in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name("changeLang");
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -1,5 +1,34 @@
 <ul class="navbar-nav ml-auto">
 
+    <div class="topbar-divider d-none d-sm-block"></div>
+
+
+    <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-globe fa-fw"></i>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">  {{__("Lang")}}</span>
+
+        </a>
+        <!-- Dropdown - User Information -->
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+             aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{{route('changeLang','ar')}}">
+                <i class="fas fa-globe fa-sm fa-fw mr-2 text-gray-400"></i>
+                {{__("Arabic")}}
+            </a>
+
+            <a class="dropdown-item" href="{{route('changeLang','en')}}">
+                <i class="fas fa-globe fa-sm fa-fw mr-2 text-gray-400"></i>
+
+                {{__("English")}}
+            </a>
+
+
+        </div>
+    </li>
+
+
     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
     <li class="nav-item dropdown no-arrow d-sm-none">
         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
