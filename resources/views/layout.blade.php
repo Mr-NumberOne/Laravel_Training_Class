@@ -23,7 +23,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
 
 </head>
@@ -58,7 +58,6 @@
         <hr class="sidebar-divider">
 
 
-
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2"
@@ -70,14 +69,18 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">{{__("access management:")}}</h6>
-                    <a class="collapse-item" href="{{route('roles.index')}}">{{__("Roles")}}</a>
-                    <a class="collapse-item" href="{{route('brands.index')}}">{{__("Users")}}</a>
+                    @can('access-roles')
+                        <a class="collapse-item" href="{{route('roles.index')}}">{{__("Roles")}}</a>
+                    @endcan
+                    @can('access-users')
+                        <a class="collapse-item" href="{{route('users.index')}}">{{__("Users")}}</a>
+                    @endcan
+
                 </div>
             </div>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
-
 
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -91,9 +94,15 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">{{__("Store management:")}}</h6>
-                    <a class="collapse-item" href="{{route('categories.index')}}">{{__("categories")}}</a>
-                    <a class="collapse-item" href="{{route('brands.index')}}">{{__("brands")}}</a>
-                    <a class="collapse-item" href="{{route('products.index')}}">{{__("products")}}</a>
+                    @can('access-categories')
+                        <a class="collapse-item" href="{{route('categories.index')}}">{{__("categories")}}</a>
+                    @endcan
+                    @can('access-brands')
+                        <a class="collapse-item" href="{{route('brands.index')}}">{{__("brands")}}</a>
+                    @endcan
+                    @can('access-products')
+                        <a class="collapse-item" href="{{route('products.index')}}">{{__("products")}}</a>
+                    @endcan
                 </div>
             </div>
         </li>
@@ -141,7 +150,7 @@
                 </form>
 
                 <!-- Topbar Navbar -->
-             @include('shared.nav')
+                @include('shared.nav')
             </nav>
             <!-- End of Topbar -->
 
@@ -211,7 +220,7 @@
 <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.select2').select2();
     });
 </script>

@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('products',
         \App\Http\Controllers\ProductController::class);
+    Route::resource('users',
+        \App\Http\Controllers\UserController::class);
 
     Route::resource('roles',
         \App\Http\Controllers\RoleController::class);
