@@ -27,7 +27,7 @@
                     <td>{{$product->id}}</td>
                     <td>{{$product->name}}</td>
                     <td><img width="60" src="{{url('storage/'.$product->image)}}"></td>
-                    <td>{{$product->brand->name}}</td>
+                    <td>{{$product->brand?->name??"Not Found"}}</td>
                     <td>
                         @foreach($product->categories as $category)
                             <span>
