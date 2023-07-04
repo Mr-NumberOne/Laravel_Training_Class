@@ -16,6 +16,7 @@ class AuthUserController extends BaseAPIController
     public function register(Request $request)
     {
 
+        // return dd($request->all());
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
@@ -47,7 +48,7 @@ class AuthUserController extends BaseAPIController
             if (Auth::attempt(['email' => $request->email,
                 'password' => $request->password])) {
                 $user = Auth::user();
-                $success['token'] = $user->createToken('Lara')->plainTextToken;
+                $success['token'] = $user->createToken('MyApp')->plainTextToken;
                 $success['name'] = $user->name;
                 $success['email'] = $user->email;
                 $success['phone'] = $user->phone;
