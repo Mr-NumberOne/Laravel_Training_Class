@@ -22,7 +22,7 @@ class AuthUserController extends BaseAPIController
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
-
+                'phone' => 'required|max:15',
             ]);
 
             if ($validator->fails()) {
