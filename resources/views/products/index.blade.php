@@ -14,6 +14,7 @@
                 <th>Name</th>
                 <th>image</th>
                 <th>Brand</th>
+                <th>created by</th>
                 <th>Categores</th>
                 <th>Price</th>
                 <th>Description</th>
@@ -28,6 +29,7 @@
                     <td>{{$product->name}}</td>
                     <td><img width="60" src="{{url('storage/'.$product->image)}}"></td>
                     <td>{{$product->brand?->name??"Not Found"}}</td>
+                    <td>{{$product->user?->name??"Not Found"}}</td>
                     <td>
                         @foreach($product->categories as $category)
                             <span>

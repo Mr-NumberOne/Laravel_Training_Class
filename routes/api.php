@@ -35,8 +35,6 @@ Route::post('/logout', [AuthUserController::class, 'destroy'])
     ->name('logout');
 //
 Route::get('products',[ProductController::class,'index']);
-Route::middleware(['auth:sanctum'])
-    ->resource('products',
-        ProductController::class)
+Route::middleware(['auth:sanctum'])->resource('products',ProductController::class)
     ->except(['index']);
-//Route::middleware(['auth:sanctum'])->resource('products',ProductController::class);
+
