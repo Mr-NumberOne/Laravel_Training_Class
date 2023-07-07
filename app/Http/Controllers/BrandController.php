@@ -19,10 +19,21 @@ class BrandController extends Controller
         $this->middleware('permission:update-brands', ['only' => ['edit', 'store']]);
         $this->middleware('permission:delete-brands', ['only' => ['destroy']]);
     }
+
     public function index()
     {
-        $brands = Brand::paginate(10);
-        return view('brands.index',compact('brands'));
+        $brands = Brand::
+        whereExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('products')
+                ->whereColumn('brands.id', 'products.brand_id');
+        })
+//        whereNotIn('id', function ($query) {
+//            $query->select('brand_id')
+//                ->from('products');
+//        })
+            ->paginate(10);
+        return view('brands.index', compact('brands'));
     }
 
     /**
@@ -39,10 +50,10 @@ class BrandController extends Controller
     public function store(StoreBrandRequest $request)
     {
 
-        $path=$request->file('image')->store('brands');
+        $path = $request->file('image')->store('brands');
         Brand::create([
-            'name'=>$request->name,
-            'image'=>$path
+            'name' => $request->name,
+            'image' => $path
         ]);
         toastr()->success('Added successfully');
         return redirect(route('brands.index'));
@@ -61,7 +72,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        return view('brands.edit')->with('brand',$brand);
+        return view('brands.edit')->with('brand', $brand);
     }
 
     /**
@@ -70,14 +81,13 @@ class BrandController extends Controller
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
         $path = $brand->image;
-        if ($request->hasFile('image'))
-        {
-            $path=$request->file('image')->store('brands');
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('brands');
             Storage::delete($brand->image);
         }
         $brand->update([
-             'name'=>$request->name,
-             'image'=>$path
+            'name' => $request->name,
+            'image' => $path
 
         ]);
         toastr()->success('Updated successfully');
@@ -89,12 +99,12 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        if ($brand->products->count()==0){
+        if ($brand->products->count() == 0) {
             Storage::delete($brand->image);
             $brand->delete();
             toastr()->success('Deleted successfully');
 
-        }else
+        } else
             toastr()->error('Deletion Failed');
         return redirect(route('brands.index'));
     }

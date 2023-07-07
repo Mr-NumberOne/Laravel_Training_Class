@@ -16,8 +16,27 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(25);
-        return view('products.index',compact('products'));
+        $products = Product::
+        whereIn('price', [100000, 1000000, 122000])
+//            whereBetween('price',[100000,220000])
+//            ->whereColumn('')
+//        where('status','=',1)
+//            ->where('price','>',250000)
+//            ->whereDate('created_at', '<', '2023-06-22')
+//            ->whereYear('created_at','2000')
+//            ->whereMonth('created_at','04')
+//            ->whereDay('created_at','12')
+//            ->whereTime('created_at', '09')
+//            ->whereNull('description')
+//            ->whereNotNull('description')
+//            ->orwhere('name','LIKE','%21%')
+//            ->where('name','LIKE','%21%')
+//            ->where([
+//                ['status', '=', '1'],
+//                ['brand_id', '<>', '1'],
+//            ])
+            ->paginate(5);
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -28,8 +47,8 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         return view('products.create')
-            ->with('categories',$categories)
-            ->with('brands',$brands);
+            ->with('categories', $categories)
+            ->with('brands', $brands);
     }
 
     /**
@@ -39,12 +58,12 @@ class ProductController extends Controller
     {
         $path = $request->file('image')->store('products');
         $product = Product::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'image'=>$path,
-            'price'=>$request->price,
-            'status'=>isset($request->status),
-            'brand_id'=>$request->brand_id
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $path,
+            'price' => $request->price,
+            'status' => isset($request->status),
+            'brand_id' => $request->brand_id
         ]);
 
         $product->categories()->sync($request->categories);
@@ -69,9 +88,9 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         return view('products.edit')
-            ->with('categories',$categories)
-            ->with('product',$product)
-            ->with('brands',$brands);
+            ->with('categories', $categories)
+            ->with('product', $product)
+            ->with('brands', $brands);
     }
 
     /**
