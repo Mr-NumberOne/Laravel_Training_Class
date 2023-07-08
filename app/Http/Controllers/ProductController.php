@@ -14,10 +14,41 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function deleted_index()
+    {
+        $products = Product::onlyTrashed()->paginate(5);
+
+        return view('products.index')
+            ->with('deleted', 1)
+            ->with('products', $products);
+    }
+    public function restore($id )
+    {
+
+        //  return dd($id);
+        Product::withTrashed()
+            ->where('id',$id)
+            ->restore();
+
+        toastr()->success('تم الاسنعادة بنجاح');
+        return redirect(route('products.index'));
+    }
+    public function forceDelete($id)
+    {
+
+        //  return dd($id);
+        Product::onlyTrashed()
+            ->where('id',$id)
+            ->forceDelete();
+
+        toastr()->success('تم الحذف بنجاح');
+        return redirect(route('products.trashed'));
+    }
     public function index()
     {
         $products = Product::
-        whereIn('price', [100000, 1000000, 122000])
+        paginate(25);
+//        whereIn('price', [100000, 1000000, 122000])
 //            whereBetween('price',[100000,220000])
 //            ->whereColumn('')
 //        where('status','=',1)
@@ -35,9 +66,9 @@ class ProductController extends Controller
 //                ['status', '=', '1'],
 //                ['brand_id', '<>', '1'],
 //            ])
-            ->paginate(5);
-        return view('products.index', compact('products'));
-    }
+        return view('products.index')
+            ->with('deleted', 0)
+            ->with('products', $products);    }
 
     /**
      * Show the form for creating a new resource.
@@ -107,8 +138,11 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         Storage::delete($product->image);
+        $product->deleted_by=auth()->id();
+        $product->save();
         $product->delete();
-        toastr()->success('Deleted successfully');
+
+        toastr()->success('تم الحذف بنجاح');
         return redirect(route('products.index'));
 
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,11 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\BrandController::class);
 
 
+    Route::get('products/trashed', [ProductController::class, 'deleted_index'])->name('products.trashed');
+    Route::get('products/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+    Route::delete('products/forceDelete/{id}', [ProductController::class, 'forceDelete'])->name('products.forceDelete');
+    Route::resource('products',
+        ProductController::class);
     Route::resource('products',
         \App\Http\Controllers\ProductController::class);
     Route::resource('users',
@@ -72,6 +78,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('roles',
         \App\Http\Controllers\RoleController::class);
+    Route::resource('roles',
+        RoleController::class);
 
 
 
