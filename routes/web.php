@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
@@ -80,7 +82,10 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\RoleController::class);
     Route::resource('roles',
         RoleController::class);
-
+    Route::get('/sendemail',function(){
+        Mail::to('mr.numberone312@gmail.com')->send(new TestEmail(['title'=>'LaravelCourse','name'=>auth()->user()->name]));
+        return '<h1>email sent</h1>';
+    });
 
 
 
