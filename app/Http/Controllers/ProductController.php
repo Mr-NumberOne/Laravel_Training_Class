@@ -97,7 +97,7 @@ class ProductController extends Controller
             'brand_id' => $request->brand_id
         ]);
 
-        $product->categories()->sync($request->categories);
+//        $product->categories()->sync($request->categories);
         // used with many-to-many relationships
         toastr()->success('created successfully');
         return redirect(route('products.index'));

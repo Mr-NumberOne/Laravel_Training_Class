@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->softDeletes();
-            $table->foreignId('deleted_by')->constrained('users','id');
+            $table->foreignId('deleted_by')->nullable()->constrained('users','id');
         });
     }
 
