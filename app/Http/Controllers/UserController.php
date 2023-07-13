@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,6 +21,24 @@ class UserController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+    public function import(Request $request )
+    {
+        $path='';
+        if($request->hasFile('file')){
+            $path=$request->file('file')->store('imports');
+        }
+        if($path != '')
+            try{
+                Excel::import(new UsersImport, 'storage/'.$path);
+
+                toastr()->success('Users Added successfully');}
+            catch(Exception $ex){
+
+                toastr()->error($ex->getMessage());}
+
+
+        return redirect(route('users.index'));
     }
 
 

@@ -78,6 +78,8 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\ProductController::class);
 
     Route::get('users/export/', [UserController::class, 'export'])->name('users.export');
+    Route::post('users/import', [UserController::class, 'import'])->name('users.import');
+
 
     Route::resource('users',
         \App\Http\Controllers\UserController::class);
