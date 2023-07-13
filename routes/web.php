@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,9 @@ Route::middleware('auth')->group(function () {
         ProductController::class);
     Route::resource('products',
         \App\Http\Controllers\ProductController::class);
+
+    Route::get('users/export/', [UserController::class, 'export'])->name('users.export');
+
     Route::resource('users',
         \App\Http\Controllers\UserController::class);
 

@@ -6,6 +6,7 @@
         <h1 style="font-family: Bangers"> users</h1>
 
         <a href="{{route('users.create')}}" class="btn btn-primary mb-5 float-right"> create</a>
+        <a href="{{route('users.export')}}" class="btn btn-success mb-5 "> export to excel</a>
 
         <table class="table table-striped">
             <thead>
