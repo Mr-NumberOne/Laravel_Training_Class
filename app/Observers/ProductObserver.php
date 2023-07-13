@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Notifications\GeneralNotification;
 
 class ProductObserver
 {
@@ -19,6 +20,17 @@ class ProductObserver
           ]);
       }
         $product->categories()->sync(request()->categories);
+
+        // auth()->user()->notify(new InvoicePaid());
+        auth()->user()->notify(
+            new GeneralNotification([
+                'content'=>'The product '.$product->name.' was added by '.auth()->user()->name,
+                'action_url'=>route('products.index'),
+                'btn_text'=>'view product',
+                'methods'=>['database','mail'],
+                'image'=>$product->image,
+            ])
+        );
     }
     /**
      * Handle the Product "while creating " event. - before entering the database
@@ -33,7 +45,7 @@ class ProductObserver
      */
     public function updated(Product $product): void
     {
-        //
+        $product->categories()->sync(request()->categories);
     }
 
     /**
